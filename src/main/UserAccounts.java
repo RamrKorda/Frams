@@ -5,17 +5,21 @@
  */
 package main;
 
+import helpers.*;
+
 /**
  *
  * @author neimaykh2021
  */
 public class UserAccounts extends javax.swing.JFrame {
-
-    /**
-     * Creates new form UserAccounts
-     */
+    
+    private Out out = new Out("Accounts.txt");
+    private In in = new In("Accounts.txt");
+    private String[] account;
     public UserAccounts() {
         initComponents();
+        InsufficientFundsLabel.setVisible(false);
+        
     }
 
     /**
@@ -29,52 +33,106 @@ public class UserAccounts extends javax.swing.JFrame {
 
         AvailableFundsLabel = new javax.swing.JLabel();
         AmountOfFundsLabel = new javax.swing.JLabel();
-        AmountTextField = new javax.swing.JTextField();
+        DollarAmountTextField = new javax.swing.JTextField();
         DepositButton = new javax.swing.JButton();
         WithdrawButton = new javax.swing.JButton();
+        DollarLabel = new javax.swing.JLabel();
+        CentsTextField = new javax.swing.JTextField();
+        CentsLabel = new javax.swing.JLabel();
+        DotLabel = new javax.swing.JLabel();
+        InsufficientFundsLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         AvailableFundsLabel.setText("Available Funds");
 
-        AmountOfFundsLabel.setText("$0.00");
+        AmountOfFundsLabel.setText("$");
+
+        DollarAmountTextField.setText("0");
 
         DepositButton.setText("Deposit");
+        DepositButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DepositButtonActionPerformed(evt);
+            }
+        });
 
         WithdrawButton.setText("Withdraw");
+        WithdrawButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WithdrawButtonActionPerformed(evt);
+            }
+        });
+
+        DollarLabel.setText("$");
+
+        CentsTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        CentsTextField.setText("0");
+
+        CentsLabel.setText("¢");
+
+        DotLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        DotLabel.setText(".");
+
+        InsufficientFundsLabel.setForeground(new java.awt.Color(204, 0, 0));
+        InsufficientFundsLabel.setText("Insufficient Funds");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(AvailableFundsLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(DepositButton)))
+                        .addComponent(DepositButton)
                         .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(WithdrawButton)
-                            .addComponent(AmountOfFundsLabel)))
+                        .addComponent(WithdrawButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                        .addComponent(DollarLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(DollarAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DotLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CentsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(InsufficientFundsLabel)
+                                .addGap(0, 91, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(AvailableFundsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AmountOfFundsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AvailableFundsLabel)
-                    .addComponent(AmountOfFundsLabel))
-                .addGap(98, 98, 98)
-                .addComponent(AmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AvailableFundsLabel)
+                            .addComponent(AmountOfFundsLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(DollarAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DollarLabel)
+                                    .addComponent(CentsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CentsLabel)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(InsufficientFundsLabel))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(DotLabel)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DepositButton)
@@ -85,46 +143,64 @@ public class UserAccounts extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DepositButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepositButtonActionPerformed
+        Integer dollar = Integer.parseInt(account[2])+Integer.parseInt(DollarAmountTextField.getText());
+        Integer cents = Integer.parseInt(account[3])+Integer.parseInt(CentsTextField.getText());
+        while (cents >= 100){
+            dollar++;
+            cents-=100;
+        }
+        account[2] = dollar+"";
+        account[3] = cents+"";
+        AmountOfFundsLabel.setText("$"+account[2]+" and "+account[3]+"¢");
+        InsufficientFundsLabel.setVisible(false);
+        DollarAmountTextField.setText("0");
+        CentsTextField.setText("0");
+    }//GEN-LAST:event_DepositButtonActionPerformed
+
+    private void WithdrawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WithdrawButtonActionPerformed
+        Integer dollar = Integer.parseInt(account[2])-Integer.parseInt(DollarAmountTextField.getText());
+        Integer cents = Integer.parseInt(account[3])-Integer.parseInt(CentsTextField.getText());
+        while (cents < 0){
+            dollar--;
+            cents+=100;
+        }
+        if (dollar>=0){
+            account[2] = dollar+"";
+            account[3] = cents+"";
+            AmountOfFundsLabel.setText("$"+account[2]+" and "+account[3]+"¢");
+            InsufficientFundsLabel.setVisible(false);
+            DollarAmountTextField.setText("0");
+            CentsTextField.setText("0");
+        }
+        else {
+            System.out.println("User has insufficient funds for withdrawal");
+            InsufficientFundsLabel.setVisible(true);
+            DollarAmountTextField.setText("0");
+            CentsTextField.setText("0");
+        }
+    }//GEN-LAST:event_WithdrawButtonActionPerformed
+
+    public void setAccount(String[] acc){
+        account = acc;
+        AmountOfFundsLabel.setText("$"+account[2]+" and "+account[3]+"¢");
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserAccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserAccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserAccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserAccounts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UserAccounts().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AmountOfFundsLabel;
-    private javax.swing.JTextField AmountTextField;
     private javax.swing.JLabel AvailableFundsLabel;
+    private javax.swing.JLabel CentsLabel;
+    private javax.swing.JTextField CentsTextField;
     private javax.swing.JButton DepositButton;
+    private javax.swing.JTextField DollarAmountTextField;
+    private javax.swing.JLabel DollarLabel;
+    private javax.swing.JLabel DotLabel;
+    private javax.swing.JLabel InsufficientFundsLabel;
     private javax.swing.JButton WithdrawButton;
     // End of variables declaration//GEN-END:variables
 }

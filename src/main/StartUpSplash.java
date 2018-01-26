@@ -29,7 +29,7 @@ public class StartUpSplash extends javax.swing.JFrame {
      */
     public StartUpSplash() {
         login = new Login();
-        login.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         login.setVisible(false);
         splash = this;
         initComponents();
@@ -45,7 +45,7 @@ public class StartUpSplash extends javax.swing.JFrame {
             login.setVisible(true);
             splash.setVisible(false);
         }
-        }, 10*1000);
+        }, 2000);
     }
 
     /**
