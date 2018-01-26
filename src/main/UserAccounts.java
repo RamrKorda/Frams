@@ -13,9 +13,11 @@ import helpers.*;
  */
 public class UserAccounts extends javax.swing.JFrame {
     
-    private Out out = new Out("Accounts.txt");
+    
     private In in = new In("Accounts.txt");
-    private String[] account;
+    private String[] account, test;
+    private String[] input = in.readAllLines();
+
     public UserAccounts() {
         initComponents();
         InsufficientFundsLabel.setVisible(false);
@@ -156,6 +158,9 @@ public class UserAccounts extends javax.swing.JFrame {
         InsufficientFundsLabel.setVisible(false);
         DollarAmountTextField.setText("0");
         CentsTextField.setText("0");
+        saveAccount();
+
+        
     }//GEN-LAST:event_DepositButtonActionPerformed
 
     private void WithdrawButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WithdrawButtonActionPerformed
@@ -172,6 +177,8 @@ public class UserAccounts extends javax.swing.JFrame {
             InsufficientFundsLabel.setVisible(false);
             DollarAmountTextField.setText("0");
             CentsTextField.setText("0");
+            saveAccount();
+            
         }
         else {
             System.out.println("User has insufficient funds for withdrawal");
@@ -184,6 +191,19 @@ public class UserAccounts extends javax.swing.JFrame {
     public void setAccount(String[] acc){
         account = acc;
         AmountOfFundsLabel.setText("$"+account[2]+" and "+account[3]+"¢");
+    }
+    
+    public void saveAccount(){
+        Out out = new Out("Accounts.txt");
+        for (int i = 0; i < input.length; i++){
+            test = input[i].split(" ");
+            if (test[0].equals(account[0])){
+                out.println(account[0]+" "+account[1]+" "+account[2]+ " "+account[3]);
+            }
+            else {
+                out.println(input[i]);
+            }
+        }
     }
     
     /**
