@@ -17,6 +17,7 @@ public class Login extends javax.swing.JFrame {
     private String[] input = in.readAllLines();
     private String[] account;
     private UserAccounts ua = new UserAccounts();
+    private AdminPanel ap = new AdminPanel();
     public Login() {
         initComponents();
         ua.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -89,14 +90,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        for (int i = 0; i < input.length; i++){
-            account = input[i].split(" ");
-            if (account[0].equals(usernameTextField.getText()) && account[1].equals(passwordTextField.getText())){
-                ua.setLocation(this.getLocation());
-                ua.setVisible(true);
-                ua.setAccount(account);
-                this.setVisible(false);
-                break;
+        if (usernameTextField.getText().equals("Admin") && passwordTextField.getText().equals("Admin")){
+                ap.setLocation(this.getLocation());
+                ap.setVisible(true);
+                ap.setAccount(account);
+                this.setVisible(false);  
+        }
+        else{
+            for (int i = 0; i < input.length; i++){
+                account = input[i].split(" ");
+                if (account[0].equals(usernameTextField.getText()) && account[1].equals(passwordTextField.getText())){
+                    ua.setLocation(this.getLocation());
+                    ua.setVisible(true);
+                    ua.setAccount(account);
+                    this.setVisible(false);
+                    break;
+                }
             }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
