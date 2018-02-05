@@ -1,51 +1,21 @@
 /*
- *  Startup panel with a bank logo. Loads the login panel after 3 seconds.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package main;
-
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+package lowLevel;
 
 /**
  *
  * @author brownzt2021
  */
-public class StartUpSplash extends javax.swing.JFrame {
-    private Login login;
-    Timer timer = new Timer();
-    private JFrame splash;
-    
+public class start extends javax.swing.JFrame {
+
     /**
-     * Creates new form StartUp
+     * Creates new form start
      */
-    public StartUpSplash() {
+    public start() {
         initComponents();
-        login = new Login();
-        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        login.setVisible(false);
-        splash = this;
-        //loads bank logo
-        ImageIcon image = new ImageIcon("Shiro.png");
-        JLabel imageLabel = new JLabel(image); 
-        add(imageLabel);
-        imageLabel.setBounds(0, 0, 673, 810);
-        imageLabel.setVisible(true);
-        //timer
-        timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-            login.setLocation(splash.getLocation());
-            login.setVisible(true);
-            splash.setVisible(false);
-        }
-        }, 3000);
     }
 
     /**
@@ -58,7 +28,6 @@ public class StartUpSplash extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 850));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,29 +60,23 @@ public class StartUpSplash extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StartUpSplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StartUpSplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StartUpSplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StartUpSplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StartUpSplash().setVisible(true);
+                new start().setVisible(true);
             }
         });
-        
-        
     }
-    
-
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

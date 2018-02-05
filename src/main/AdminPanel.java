@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
+ *  
+ *  Creates an admin panel that allows the admin to edit user accounts
  */
 package main;
 
@@ -189,6 +189,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private void dollarsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dollarsTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dollarsTextFieldActionPerformed
+    
     public void saveAccount(){
         Out out = new Out("Accounts.txt");
         for (int i = 0; i < input.length; i++){
