@@ -11,12 +11,13 @@ import helpers.In;
  */
 public class Login extends javax.swing.JFrame {
 
-    private In in = new In("Accounts.txt");
-    private String[] input = in.readAllLines();
+    private In in;
+    private String[] input;
     private String[] account;
-    private UserAccounts ua = new UserAccounts();
+    private UserAccounts ua = new UserAccounts(this);
     private AdminPanel ap = new AdminPanel();
     public Login() {
+        loadIn();
         initComponents();
         ua.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ua.setVisible(false);
@@ -108,7 +109,10 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    
+    public void loadIn(){
+        in = new In("Accounts.txt");
+        input = in.readAllLines();
+    }
     
     /**
      * @param args the command line arguments

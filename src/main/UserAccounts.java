@@ -16,11 +16,11 @@ public class UserAccounts extends javax.swing.JFrame {
     private In in = new In("Accounts.txt");
     private String[] account, test;
     private String[] input = in.readAllLines();
-
-    public UserAccounts() {
+    private Login login;
+    public UserAccounts(Login log) {
         initComponents();
         InsufficientFundsLabel.setVisible(false);
-        
+        login = log;
     }
 
     /**
@@ -42,6 +42,7 @@ public class UserAccounts extends javax.swing.JFrame {
         CentsLabel = new javax.swing.JLabel();
         DotLabel = new javax.swing.JLabel();
         InsufficientFundsLabel = new javax.swing.JLabel();
+        logoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,37 +79,49 @@ public class UserAccounts extends javax.swing.JFrame {
         InsufficientFundsLabel.setForeground(new java.awt.Color(204, 0, 0));
         InsufficientFundsLabel.setText("Insufficient Funds");
 
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(DepositButton)
-                        .addGap(83, 83, 83)
-                        .addComponent(WithdrawButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(DollarLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(DollarAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DotLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CentsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(InsufficientFundsLabel)
-                                .addGap(0, 91, Short.MAX_VALUE))
+                                .addComponent(DepositButton)
+                                .addGap(83, 83, 83)
+                                .addComponent(WithdrawButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(AvailableFundsLabel)
+                                .addComponent(DollarLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AmountOfFundsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(DollarAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(DotLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CentsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(InsufficientFundsLabel)
+                                        .addGap(0, 91, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(AvailableFundsLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AmountOfFundsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logoutButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -138,7 +151,9 @@ public class UserAccounts extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DepositButton)
                     .addComponent(WithdrawButton))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(logoutButton)
+                .addContainerGap())
         );
 
         pack();
@@ -187,6 +202,12 @@ public class UserAccounts extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_WithdrawButtonActionPerformed
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        login.setLocation(this.getLocation());
+        login.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
     public void setAccount(String[] acc){
         account = acc;
         AmountOfFundsLabel.setText("$"+account[2]+" and "+account[3]+"¢");
@@ -221,5 +242,6 @@ public class UserAccounts extends javax.swing.JFrame {
     private javax.swing.JLabel DotLabel;
     private javax.swing.JLabel InsufficientFundsLabel;
     private javax.swing.JButton WithdrawButton;
+    private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 }
