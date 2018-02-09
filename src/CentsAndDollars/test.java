@@ -5,6 +5,10 @@
  */
 package CentsAndDollars;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Math.round;
+import java.text.DecimalFormat;
+
 /**
  *
  * @author brownzt2021
@@ -85,12 +89,11 @@ public class test extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ProcessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcessButtonActionPerformed
-//        String[] input = jTextArea1.getText().split(".");
-//        input[0] = input[0]+".";
-//        input[1] = input[1].substring(0,1);
-//        processArea1.setText(input[0] + input[1]);
-        
-        
+        String input = jTextArea1.getText();
+        double money = parseDouble(input);
+        DecimalFormat newMoney = new DecimalFormat("#.##");
+        double rounded = Double.valueOf(newMoney.format(money));
+        processArea1.setText(rounded+"");
         
         
         
